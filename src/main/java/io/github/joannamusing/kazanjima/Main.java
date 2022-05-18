@@ -1,5 +1,7 @@
 package io.github.joannamusing.kazanjima;
 
+import io.github.joannamusing.kazanjima.commands.Feed;
+import io.github.joannamusing.kazanjima.commands.Heal;
 import io.github.joannamusing.kazanjima.commands.Suicide;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,6 +20,8 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
     }
     public void registerCommands(){
+        this.getCommand("feed").setExecutor(new Feed());
+        this.getCommand("heal").setExecutor(new Heal());
         this.getCommand("suicide").setExecutor(new Suicide());
         l.info("Commands have been registered.");
     }

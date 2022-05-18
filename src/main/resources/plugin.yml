@@ -7,6 +7,14 @@ description: Who knows what this is?
 website: https://github.com/joannamusing
 
 commands:
+  feed:
+    permission: kazanjima.commands.feed
+    permission-message: Missing permission - kazanjima.commands.feed
+    description: Restores the user's hunger bar to full.
+  heal:
+    permission: kazanjima.commands.heal
+    permission-message: Missing permission - kazanjima.commands.heal
+    description: Restores the user's health bar to full.
   suicide:
     permission: kazanjima.commands.suicide
     permission-message: Missing permission - kazanjima.commands.suicide
@@ -21,6 +29,9 @@ permissions:
     description: Gives access to all Kazanjima commands.
     children:
       kazanjima.commands.suicide: true
+  kazanjima.commands.feed:
+    default: op
+  kazanjima.commands.heal:
+    default: op
   kazanjima.commands.suicide:
-    description: Grants a swift and painless death to the user.
     default: op
