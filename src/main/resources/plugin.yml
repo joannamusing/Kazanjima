@@ -5,3 +5,22 @@ api-version: 1.18
 authors: [ joannamusing ]
 description: Who knows what this is?
 website: https://github.com/joannamusing
+
+commands:
+  suicide:
+    permission: kazanjima.commands.suicide
+    permission-message: Missing permission - kazanjima.commands.suicide
+    description: Grants a swift and painless death to the user.
+
+permissions:
+  kazanjima.*:
+    description: Gives access to all Kazanjima permissions.
+    children:
+      kazanjima.commands.*: true
+  kazanjima.commands.*:
+    description: Gives access to all Kazanjima commands.
+    children:
+      kazanjima.commands.suicide: true
+  kazanjima.commands.suicide:
+    description: Grants a swift and painless death to the user.
+    default: op
