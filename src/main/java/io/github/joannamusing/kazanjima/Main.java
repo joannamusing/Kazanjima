@@ -18,7 +18,7 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
     }
     public void registerCommands(){
-        getCommand("suicide").setExecutor(new Suicide());
+        this.getCommand("suicide").setExecutor(new Suicide());
         l.info("Commands have been registered.");
     }
     public void registerEvents(){
