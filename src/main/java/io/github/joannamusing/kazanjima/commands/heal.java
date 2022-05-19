@@ -6,16 +6,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class Feed implements CommandExecutor {
+public class heal implements CommandExecutor{
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
-            if(player.hasPermission("kazanjima.commands.feed")){
-                player.setFoodLevel(20);
-                player.sendMessage("You have been fed!");
-            }else{
-                player.sendMessage("Kazanjima: Missing permissions \"kazanjima.commands.feed\"!");
+            if(player.hasPermission("kazanjima.commands.heal")){
+                player.setHealth(20); //Change to default maximum value.
+                player.sendMessage("You have been healed!");
             }
         }
         return false;

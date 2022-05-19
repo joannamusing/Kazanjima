@@ -1,6 +1,6 @@
 name: Kazanjima
 version: '${project.version}'
-main: io.github.joannamusing.kazanjima.Main
+main: io.github.joannamusing.kazanjima.main
 api-version: 1.18
 authors: [ joannamusing ]
 description: Who knows what this is?
@@ -15,6 +15,14 @@ commands:
     permission: kazanjima.commands.heal
     permission-message: Missing permission - kazanjima.commands.heal
     description: Restores the user's health bar to full.
+  item:
+    permission: kazanjima.commands.item
+    permission-message: Missing permission - kazanjima.commands.item
+    description: Allows the user to give themselves any item.
+  rtp:
+    permission: kazanjima.commands.rtp
+    permission-message: Missing permission - kazanjima.commands.rtp
+    description: Teleports the user to a random location.
   suicide:
     permission: kazanjima.commands.suicide
     permission-message: Missing permission - kazanjima.commands.suicide
@@ -32,6 +40,8 @@ permissions:
   kazanjima.commands.feed:
     default: op
   kazanjima.commands.heal:
+    default: op
+  kazanjima.commands.item:
     default: op
   kazanjima.commands.suicide:
     default: op
