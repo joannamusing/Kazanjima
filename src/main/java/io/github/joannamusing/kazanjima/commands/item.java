@@ -1,8 +1,10 @@
 package io.github.joannamusing.kazanjima.commands;
 
+import io.github.joannamusing.kazanjima.items.ender_bow;
 import io.github.joannamusing.kazanjima.items.molten_pickaxe;
 import io.github.joannamusing.kazanjima.util.utility;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,7 +26,6 @@ public class item implements CommandExecutor {
                         amount = Integer.parseInt(args[1]);
                     }
                     try {
-                        //This is a code block to get us any of the custom items we have created.
                         for (int x = 0; x < amount; x++) {
                             ArrayList<String> itemNames = getItemNames(getItems());
                             for (int i = 0; i < itemNames.size(); i++) {
@@ -32,16 +33,6 @@ public class item implements CommandExecutor {
                                         player.getInventory().addItem(getItems().get(i));
                                 }
                             }
-                            //This code doesn't error, but it is not working as intended.
-                            /*
-                            ArrayList<String> allNames = utility.allNames(utility.allMetas(utility.allItems(utility.allMaterials())));
-                            for (int i = 0; i < allNames.size(); i++) {
-                                if (args[0].equalsIgnoreCase(allNames.get(i))) {
-                                    ItemStack itemStack = new ItemStack(utility.allMaterials().get(i));
-                                    player.getInventory().addItem(itemStack);
-                                }
-                            }
-                            */
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -52,6 +43,10 @@ public class item implements CommandExecutor {
     }
     public static ArrayList<ItemStack> getItems () {
         ArrayList<ItemStack> items = new ArrayList<>();
+        for(Material material : Material.values()){
+            items.add(new ItemStack(material));
+        }
+        items.add(ender_bow.get());
         items.add(molten_pickaxe.get());
         return items;
     }

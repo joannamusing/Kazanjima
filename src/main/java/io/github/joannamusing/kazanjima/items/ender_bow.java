@@ -8,18 +8,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class molten_pickaxe {
+public class ender_bow {
     public static ItemStack get(){
-        ItemStack itemStack = new ItemStack(Material.DIAMOND_PICKAXE);
+        ItemStack itemStack = new ItemStack(Material.BOW);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if(itemMeta != null) {
-            itemMeta.setDisplayName(ChatColor.GOLD + "Molten Pickaxe");
+            itemMeta.setDisplayName(ChatColor.DARK_PURPLE + "Ender Bow");
 
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(ChatColor.DARK_RED + "Forged in the heart of a volcano.");
+            lore.add(ChatColor.LIGHT_PURPLE + "A legendary weapon used by the Ender Queen.");
             itemMeta.setLore(lore);
 
-            itemMeta.addEnchant(Enchantment.DIG_SPEED, 5, true);
+            itemMeta.addEnchant(Enchantment.DURABILITY, 5, true);
 
             itemStack.setItemMeta(itemMeta);
         }

@@ -23,9 +23,13 @@ public class random_teleport implements CommandExecutor {
                 int y = 50;
                 World world = player.getWorld();
                 Location location = new Location(world, x, y, z);
-                while (!location.getBlock().getType().isAir()) {
-                    y += 1;
-                }
+                try {
+                    while (!location.getBlock().getType().isAir()) {
+                        y += 1;
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                    }
                 player.teleport(location);
                 player.sendMessage("You have teleported to a random location!");
             }

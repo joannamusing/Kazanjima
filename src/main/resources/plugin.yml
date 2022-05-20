@@ -1,6 +1,6 @@
 name: Kazanjima
 version: '${project.version}'
-main: io.github.joannamusing.kazanjima.main
+main: io.github.joannamusing.kazanjima.Main
 api-version: 1.18
 authors: [ joannamusing ]
 description: Who knows what this is?
