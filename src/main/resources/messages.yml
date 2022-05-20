@@ -1,0 +1,2 @@
+#This is the YAML file that controls all of the basic messages we respond with for events.
+welcome-message: "Welcome to the server, you potato!"
