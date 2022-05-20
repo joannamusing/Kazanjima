@@ -22,11 +22,15 @@ public class setup{
             path.mkdir();
         }
     }
-    public File getFile(Player player){
+    public File getPlayerFile(Player player){
         String uuid = player.getUniqueId().toString();
         file = new File(path + "\\" + uuid + ".yml");
         return file;
 
+    }
+    public File getFile(String path, String name){
+        file = new File(path, name);
+        return file;
     }
     public void writeFile(Player player, String path, String value){
 
@@ -50,6 +54,11 @@ public class setup{
 
                 fc.createSection("uuid");
                 fc.set("uuid", uuid);
+
+                fc.createSection("homes.max");
+                fc.set("homes.max", 1); //Default value, pull from config.yml later for user friendly.
+                fc.createSection("homes.total");
+                fc.set("homes.total", 0);
 
                 fc.save(file);
             }catch(IOException e){

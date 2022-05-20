@@ -7,6 +7,14 @@ description: Who knows what this is?
 website: https://github.com/joannamusing
 
 commands:
+  delhome:
+    permission: kazanjima.commands.delhome
+    permission-message: Missing permission - kazanjima.commands.delhome
+    description: Deletes a home.
+  delwarp:
+    permission: kazanjima.commands.delwarp
+    permission-message: Missing permission - kazanjima.commands.delwarp
+    description: Deletes a warp.
   feed:
     permission: kazanjima.commands.feed
     permission-message: Missing permission - kazanjima.commands.feed
@@ -15,6 +23,10 @@ commands:
     permission: kazanjima.commands.heal
     permission-message: Missing permission - kazanjima.commands.heal
     description: Restores the user's health bar to full.
+  home:
+    permission: kazanjima.commands.home
+    permission-message: Missing permission - kazanjima.commands.home
+    description: Teleports the user to a named home.
   item:
     permission: kazanjima.commands.item
     permission-message: Missing permission - kazanjima.commands.item
@@ -23,10 +35,22 @@ commands:
     permission: kazanjima.commands.rtp
     permission-message: Missing permission - kazanjima.commands.rtp
     description: Teleports the user to a random location.
+  sethome:
+    permission: kazanjima.commands.sethome
+    permission-message: Missing permission - kazanjima.commands.sethome
+    description: Sets the user's home to the current location.
+  setwarp:
+    permission: kazanjima.commands.setwarp
+    permission-message: Missing permission - kazanjima.commands.setwarp
+    description: Sets a public warp to the current location.
   suicide:
     permission: kazanjima.commands.suicide
     permission-message: Missing permission - kazanjima.commands.suicide
     description: Grants a swift and painless death to the user.
+  warp:
+    permission: kazanjima.commands.warp
+    permission-message: Missing permission - kazanjima.commands.warp
+    description: Teleports the user to a named warp.
 
 permissions:
   kazanjima.*:
@@ -36,12 +60,36 @@ permissions:
   kazanjima.commands.*:
     description: Gives access to all Kazanjima commands.
     children:
+      kazanjima.commands.delhome: true
+      kazanjima.commands.delwarp: true
+      kazanjima.commands.feed: true
+      kazanjima.commands.heal: true
+      kazanjima.commands.home: true
+      kazanjima.commands.item: true
+      kazanjima.commands.rtp: true
+      kazanjima.commands.sethome: true
+      kazanjima.commands.setwarp: true
       kazanjima.commands.suicide: true
+      kazanjima.commands.warp: true
+  kazanjima.commands.delhome:
+    default: op
+  kazanjima.commands.delwarp:
+    default: op
   kazanjima.commands.feed:
     default: op
   kazanjima.commands.heal:
     default: op
+  kazanjima.commands.home:
+    default: op
   kazanjima.commands.item:
     default: op
+  kazanjima.commands.rtp:
+    default: op
+  kazanjima.commands.sethome:
+    default: op
+  kazanjima.commands.setwarp:
+    default: op
   kazanjima.commands.suicide:
+    default: op
+  kazanjima.commands.warp:
     default: op

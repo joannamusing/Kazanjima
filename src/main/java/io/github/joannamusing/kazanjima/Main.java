@@ -24,11 +24,17 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
     }
     public void registerCommands(){
+        this.getCommand("delhome").setExecutor(new delete_home());
+        this.getCommand("delwarp").setExecutor(new delete_warp());
         this.getCommand("feed").setExecutor(new feed());
         this.getCommand("heal").setExecutor(new heal());
+        this.getCommand("home").setExecutor(new home());
         this.getCommand("item").setExecutor(new item());
         this.getCommand("rtp").setExecutor(new random_teleport());
+        this.getCommand("sethome").setExecutor(new set_home());
+        this.getCommand("setwarp").setExecutor(new set_warp());
         this.getCommand("suicide").setExecutor(new suicide());
+        this.getCommand("warp").setExecutor(new warp());
         l.info("Commands have been registered.");
     }
     public void registerEvents(){
