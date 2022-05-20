@@ -28,11 +28,11 @@ public class home implements CommandExecutor {
                     for(String key : Objects.requireNonNull(fc.getConfigurationSection("homes.home")).getKeys(false)) {
                         if(args[0].equalsIgnoreCase(key)){
                             World world = (World) fc.get("homes.home" + args[0] + ".world");
-                            double x = (double) fc.get("homes.home." + args[0] + ".x");
-                            double y = (double) fc.get("homes.home." + args[0] + ".y");
-                            double z = (double) fc.get("homes.home." + args[0] + ".z");
-                            float pitch = (float) fc.get("homes.home." + args[0] + ".pitch");
-                            float yaw = (float) fc.get("homes.home." + args[0] + ".yaw");
+                            double x = fc.getDouble("homes.home." + args[0] + ".x");
+                            double y = fc.getDouble("homes.home." + args[0] + ".y");
+                            double z = fc.getDouble("homes.home." + args[0] + ".z");
+                            float pitch = (float) fc.getDouble("homes.home." + args[0] + ".pitch");
+                            float yaw = (float) fc.getDouble("homes.home." + args[0] + ".yaw");
 
                             Location location = new Location(world, x, y, z, pitch, yaw);
                             player.teleport(location);
