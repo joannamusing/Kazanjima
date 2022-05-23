@@ -20,8 +20,19 @@ public class delete_home implements CommandExecutor {
             if (player.hasPermission("kazanjima.commands.delhome")) {
                 File file = alpha.getPlayerFile(player);
                 FileConfiguration fc = YamlConfiguration.loadConfiguration(file);
-                //set section to null to remove along with subsections of that section.
-
+                int totalHomes = fc.getInt("homes.total");
+                if(args.length == 1){
+                    String s = "homes.home." + args[0];
+                    if (fc.isConfigurationSection(s)) {
+                        fc.set(s, null);
+                        totalHomes -= 1;
+                        fc.set("homes.total", totalHomes);
+                        player.sendMessage("Home removed.");
+                        setup.saveFile(file, fc);
+                    }else{
+                        player.sendMessage("No home with that name found.");
+                    }
+                }
             }
         }
         return true;

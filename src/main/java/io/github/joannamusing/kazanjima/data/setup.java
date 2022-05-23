@@ -32,11 +32,26 @@ public class setup{
         file = new File(path, name);
         return file;
     }
-    public void writeFile(Player player, String path, String value){
+    public static void saveFile(File file, FileConfiguration fileConfiguration){
+        try{
+            fileConfiguration.save(file);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
-    public void saveFile(Player player){
-
+    public void setupFile(String path, String fileName){
+        file = new File(path, fileName);
+        fc = YamlConfiguration.loadConfiguration(file);
+        setupDirectory();
+        if(!file.exists()){
+            try{
+                file.createNewFile();
+                fc.save(file);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
     public void setupPlayerFile(Player player){
         String name = player.getName();
@@ -56,7 +71,7 @@ public class setup{
                 fc.set("uuid", uuid);
 
                 fc.createSection("homes.max");
-                fc.set("homes.max", 1); //Default value, pull from config.yml later for user friendly.
+                fc.set("homes.max", 2); //Default value, pull from config.yml later for user friendly.
                 fc.createSection("homes.total");
                 fc.set("homes.total", 0);
 

@@ -1,6 +1,7 @@
 package io.github.joannamusing.kazanjima.commands;
 
 import io.github.joannamusing.kazanjima.data.setup;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class home implements CommandExecutor {
@@ -27,12 +29,17 @@ public class home implements CommandExecutor {
                 if(args.length == 1){
                     for(String key : Objects.requireNonNull(fc.getConfigurationSection("homes.home")).getKeys(false)) {
                         if(args[0].equalsIgnoreCase(key)){
-                            World world = (World) fc.get("homes.home" + args[0] + ".world");
-                            double x = fc.getDouble("homes.home." + args[0] + ".x");
-                            double y = fc.getDouble("homes.home." + args[0] + ".y");
-                            double z = fc.getDouble("homes.home." + args[0] + ".z");
-                            float pitch = (float) fc.getDouble("homes.home." + args[0] + ".pitch");
-                            float yaw = (float) fc.getDouble("homes.home." + args[0] + ".yaw");
+                            String s = "homes.home." + args[0] + ".";
+                            World world = Bukkit.getWorld(Objects.requireNonNull(fc.getString(s + "world")));
+                            double x = fc.getDouble(s + "x");
+                            double y = fc.getDouble(s + "y");
+                            double z = fc.getDouble(s + "z");
+
+                            //Pitch and Yaw are not working properly but the system does work...
+                            BigDecimal tempPitch = BigDecimal.valueOf(fc.getDouble(s + "pitch"));
+                            BigDecimal tempYaw = BigDecimal.valueOf(fc.getDouble(s + "yaw"));
+                            float pitch = tempPitch.floatValue();
+                            float yaw = tempYaw.floatValue();
 
                             Location location = new Location(world, x, y, z, pitch, yaw);
                             player.teleport(location);

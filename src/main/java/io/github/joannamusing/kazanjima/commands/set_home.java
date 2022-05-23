@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 public class set_home implements CommandExecutor {
     setup alpha = new setup();
@@ -35,31 +34,33 @@ public class set_home implements CommandExecutor {
                         double z = location.getZ();
                         float pitch = location.getPitch();
                         float yaw = location.getYaw();
+                        //This is where we declare the path in the player files all homes will take.
+                        String s = "homes.home." + args[0];
+                        if (fc.isConfigurationSection(s)) {
+                            player.sendMessage("A home with that name already exists.");
+                        } else {
+                            //We create a new section in the player file for our home coordinates.
+                            fc.createSection(s + ".world");
+                            fc.createSection(s + ".x");
+                            fc.createSection(s + ".y");
+                            fc.createSection(s + ".z");
+                            fc.createSection(s + ".pitch");
+                            fc.createSection(s + ".yaw");
+                            //We then set those sections to the value of the location.
+                            fc.set(s + ".world", world);
+                            fc.set(s + ".x", x);
+                            fc.set(s + ".y", y);
+                            fc.set(s + ".z", z);
+                            fc.set(s + ".pitch", pitch);
+                            fc.set(s + ".yaw", yaw);
 
-                        fc.createSection("homes.home."+ args[0] + ".world");
-                        fc.createSection("homes.home." + args[0] + ".x");
-                        fc.createSection("homes.home." + args[0] + ".y");
-                        fc.createSection("homes.home." + args[0] + ".z");
-                        fc.createSection("homes.home." + args[0] + ".pitch");
-                        fc.createSection("homes.home." + args[0] + ".yaw");
-
-                        fc.set("homes.home." + args[0] + ".world", world);
-                        fc.set("homes.home." + args[0] + ".x", x);
-                        fc.set("homes.home." + args[0] + ".y", y);
-                        fc.set("homes.home." + args[0] + ".z", z);
-                        fc.set("homes.home." + args[0] + ".pitch", pitch);
-                        fc.set("homes.home." + args[0] + ".yaw", yaw);
-
-                        player.sendMessage("You have set the home: " + args[0] + "!");
-                        totalHomes += 1;
-                        fc.set("homes.total", totalHomes);
-                        try {
-                            fc.save(file);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            player.sendMessage("You have set the home: " + args[0] + "!");
+                            //Got to make sure we increase the total amount of homes the player has set.
+                            totalHomes += 1;
+                            fc.set("homes.total", totalHomes);
+                            setup.saveFile(file, fc);
                         }
                     }
-
                 }else{
                     player.sendMessage("/sethome <name>");
                 }
