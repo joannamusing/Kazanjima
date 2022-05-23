@@ -5,10 +5,15 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class utility {
 
@@ -65,5 +70,38 @@ public class utility {
         //Adding a click event to our amazing component. Command would be "party join" for our purposes.
         component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + command));
         player.spigot().sendMessage(component);
+    }
+    public static Location generateLocation(Player player){
+        Random random = new Random();
+
+        int x = random.nextInt(1000);
+        int y = 0;
+        int z = random.nextInt(1000);
+
+        Location location = new Location(player.getWorld(), x, y, z);
+        y = location.getWorld().getHighestBlockYAt(location);
+        location.setY(y + 1);
+        getSafeLocation(location, player);
+        return location;
+    }
+    public static Location getSafeLocation(Location location, Player player){
+        ArrayList<Biome> biomes = new ArrayList<>();
+        //Change this to a config setting eventually.
+        biomes.add(Biome.OCEAN);
+        biomes.add(Biome.COLD_OCEAN);
+        biomes.add(Biome.DEEP_OCEAN);
+        biomes.add(Biome.DEEP_COLD_OCEAN);
+        biomes.add(Biome.FROZEN_OCEAN);
+        biomes.add(Biome.DEEP_FROZEN_OCEAN);
+        biomes.add(Biome.DEEP_LUKEWARM_OCEAN);
+        biomes.add(Biome.LUKEWARM_OCEAN);
+        biomes.add(Biome.WARM_OCEAN);
+        for(Biome biome : biomes){
+            if(location.getWorld().getBiome(location).equals(biome)){
+                generateLocation(player);
+                return null;
+            }
+        }
+        return location;
     }
 }

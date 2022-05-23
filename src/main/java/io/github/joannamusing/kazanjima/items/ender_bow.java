@@ -23,6 +23,7 @@ public class ender_bow {
 
             itemStack.setItemMeta(itemMeta);
         }
+        
         return itemStack;
     }
 }

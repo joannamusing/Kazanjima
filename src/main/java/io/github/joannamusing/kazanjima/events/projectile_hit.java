@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class projectile_hit implements Listener {
     @EventHandler
@@ -17,7 +18,9 @@ public class projectile_hit implements Listener {
             if(event.getEntity().getShooter() instanceof Player) {
                 Player player = (Player) event.getEntity().getShooter();
                 //Reminder to figure out how to check durability when comparing items.
-                if (player.getInventory().getItemInMainHand().isSimilar(ender_bow.get())) {
+                ItemStack playerItem = player.getInventory().getItemInMainHand();
+                ItemStack enderBow = ender_bow.get();
+                if (playerItem.isSimilar(enderBow)) {
                     Material material = Material.ENDER_PEARL;
                     int amount = 1;
                     int total = utility.getTotal(player, material);
@@ -28,6 +31,8 @@ public class projectile_hit implements Listener {
                     }else{
                         player.sendMessage("This ability requires [" + amount + "] [" + material + "].");
                     }
+                }else{
+                    player.sendMessage("WRONG ITEM!");
                 }
             }
         }
