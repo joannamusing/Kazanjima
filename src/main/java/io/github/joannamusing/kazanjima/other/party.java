@@ -32,4 +32,10 @@ public class party {
         if(partyMembers.contains(uuid){
             partyMembers.remove(uuid);
         }
+    }
+    public void setPartyLeader(Player player){
+        if(partyMembers.contains(player.getUniqueID()){
+            this.partyUUID = player.getUniqueID();
+        }
+    }
 }
