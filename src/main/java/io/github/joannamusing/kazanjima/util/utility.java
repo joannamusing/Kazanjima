@@ -16,6 +16,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class utility {
+    //Needs to be tested and put in local repository on desktop.
+    public static boolean compareItems(ItemStack a, ItemStack b){
+        //If the lore of the items match, return true.
+        ItemMeta itemMetaA = a.getItemMeta();
+        ItemMeta itemMetaB = b.getItemMeta();
+        if(itemMetaA.getLore().equals(b.getItemMeta.getLore()){
+            return true;
+        }
+        return false;
+    }
 
     //Checks if a string is an integer.
     public static boolean isInt(String string){

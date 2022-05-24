@@ -19,23 +19,23 @@ public class item implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
                 if (player.hasPermission("kazanjima.commands.item")) {
-                    if (args.length == 2) {
-                        int amount = 1;
+                    int amount = 1;
+                    if(args.length > 1){
                         if (utility.isInt(args[1])) {
                             amount = Integer.parseInt(args[1]);
                         }
-                        try {
-                            for (int x = 0; x < amount; x++) {
-                                ArrayList<String> itemNames = getItemNames(getItems());
-                                for (int i = 0; i < itemNames.size(); i++) {
-                                    if (args[0].equalsIgnoreCase(itemNames.get(i))) {
-                                        player.getInventory().addItem(getItems().get(i));
-                                    }
+                    }
+                    try {
+                        for (int x = 0; x < amount; x++) {
+                            ArrayList<String> itemNames = getItemNames(getItems());
+                            for (int i = 0; i < itemNames.size(); i++) {
+                                if (args[0].equalsIgnoreCase(itemNames.get(i))) {
+                                    player.getInventory().addItem(getItems().get(i));
                                 }
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
+                    }catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
@@ -43,6 +43,7 @@ public class item implements CommandExecutor {
     }
     public static ArrayList<ItemStack> getItems () {
         ArrayList<ItemStack> items = new ArrayList<>();
+        //This does not work to get all possible items; use /give instead.
         /*
         for(Material material : Material.values()){
             items.add(new ItemStack(material));
