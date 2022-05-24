@@ -54,7 +54,7 @@ public class set_warp implements CommandExecutor {
                         fc.set(s + ".yaw", yaw);
 
                         player.sendMessage("You have set the warp: " + args[0] + "!");
-                        setup.saveFile(file, fc);
+                        alpha.saveFile(file, fc);
                     }
                 }
             }

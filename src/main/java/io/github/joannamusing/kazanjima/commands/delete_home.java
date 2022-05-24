@@ -1,5 +1,6 @@
 package io.github.joannamusing.kazanjima.commands;
 
+import io.github.joannamusing.kazanjima.data.player_setup;
 import io.github.joannamusing.kazanjima.data.setup;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 
 public class delete_home implements CommandExecutor {
-    setup alpha = new setup();
+    player_setup alpha = new player_setup();
+    setup beta = new setup();
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -28,7 +30,7 @@ public class delete_home implements CommandExecutor {
                         totalHomes -= 1;
                         fc.set("homes.total", totalHomes);
                         player.sendMessage("Home removed.");
-                        setup.saveFile(file, fc);
+                        beta.saveFile(file, fc);
                     }else{
                         player.sendMessage("No home with that name found.");
                     }

@@ -1,6 +1,6 @@
 package io.github.joannamusing.kazanjima.commands;
 
-import io.github.joannamusing.kazanjima.data.setup;
+import io.github.joannamusing.kazanjima.data.player_setup;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class home implements CommandExecutor {
-    setup alpha = new setup();
+    player_setup alpha = new player_setup();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

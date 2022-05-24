@@ -1,11 +1,13 @@
 package io.github.joannamusing.kazanjima;
 
 import com.google.inject.Inject;
+import com.velocitypowered.api.command.CommandManager;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import io.github.joannamusing.kazanjima.commands.party;
 import org.slf4j.Logger;
 
 import java.nio.file.Path;
@@ -28,8 +30,10 @@ public class Velocity {
     }
     @Subscribe
     public void onInitialization(ProxyInitializeEvent event){
-        //Register our events and commands here.
+        CommandManager commandManager = proxyServer.getCommandManager();
+        commandManager.register("party", new party());
+        logger.info("[Kazanjima]: Registered commands.");
+
+        logger.info("[Kazanjima]: Registered events.");
     }
-
-
 }

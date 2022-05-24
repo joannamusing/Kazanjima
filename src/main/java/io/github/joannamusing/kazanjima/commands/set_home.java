@@ -1,5 +1,6 @@
 package io.github.joannamusing.kazanjima.commands;
 
+import io.github.joannamusing.kazanjima.data.player_setup;
 import io.github.joannamusing.kazanjima.data.setup;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -13,7 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 
 public class set_home implements CommandExecutor {
-    setup alpha = new setup();
+    player_setup alpha = new player_setup();
+    setup beta = new setup();
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -58,7 +60,7 @@ public class set_home implements CommandExecutor {
                             //Got to make sure we increase the total amount of homes the player has set.
                             totalHomes += 1;
                             fc.set("homes.total", totalHomes);
-                            setup.saveFile(file, fc);
+                            beta.saveFile(file, fc);
                         }
                     }
                 }else{

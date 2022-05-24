@@ -1,6 +1,7 @@
 package io.github.joannamusing.kazanjima.commands;
 
 import io.github.joannamusing.kazanjima.Main;
+import io.github.joannamusing.kazanjima.data.player_setup;
 import io.github.joannamusing.kazanjima.data.setup;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,7 +29,7 @@ public class delete_warp implements CommandExecutor {
                     if (fc.isConfigurationSection(s)) {
                         fc.set(s, null);
                         player.sendMessage("Warp removed.");
-                        setup.saveFile(file, fc);
+                        alpha.saveFile(file, fc);
                     }else{
                         player.sendMessage("No warp with that name found.");
                     }

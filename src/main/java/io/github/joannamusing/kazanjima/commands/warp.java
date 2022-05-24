@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class warp implements CommandExecutor {
-    setup alpha = new setup();
+    setup files = new setup();
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -26,7 +26,7 @@ public class warp implements CommandExecutor {
             if (player.hasPermission("kazanjima.commands.warp")) {
                 String path = Main.getInstance().getDataFolder().getPath();
                 String fileName = "warp.yml";
-                File file = alpha.getFile(path, fileName);
+                File file = files.getFile(path, fileName);
                 FileConfiguration fc = YamlConfiguration.loadConfiguration(file);
                 if(args.length == 1){
                     for(String key : Objects.requireNonNull(fc.getConfigurationSection("warp")).getKeys(false)) {
