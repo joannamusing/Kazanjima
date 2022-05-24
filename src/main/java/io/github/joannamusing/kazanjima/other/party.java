@@ -29,5 +29,7 @@ public class party {
         }
     }
     public void removePartyMember(UUID uuid){
-        
+        if(partyMembers.contains(uuid){
+            partyMembers.remove(uuid);
+        }
 }
