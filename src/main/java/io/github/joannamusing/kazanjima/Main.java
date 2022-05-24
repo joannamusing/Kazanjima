@@ -16,6 +16,10 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         l = getLogger();
+        
+        //Grab the default config.yml and save it.
+        this.getServer().getConfig().getDefaultConfig();
+        saveDefaultConfig();
 
         registerCommands();
         registerEvents();
