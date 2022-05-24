@@ -5,13 +5,29 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 public class party {
-    UUID uuid;
-    String partyID;
+    UUID partyUUID;
+    ArrayList<UUID> partyMembers = new ArrayList<>();
 
     //We create a party object, using values we get from the leader of the new party.
     public party(Player partyLeader){
         uuid = partyLeader.getUniqueId();
-        partyID = uuid.toString();
+        members.add(uuid);
 
     }
+    public UUID getPartyUUID(){
+        return this.partyUUID;
+    }
+    public void setPartyUUID(Player player){
+        this.partyUUID = player.getUniqueID();
+    }
+    public ArrayList<UUID> getPartyMembers(){
+        return this.partyMembers();
+    }
+    public void addPartyMember(UUID uuid){
+        if(!(getPartyMembers().contains(uuid)){
+            partyMembers.add(player.getUniqueID();
+        }
+    }
+    public void removePartyMember(UUID uuid){
+        
 }
