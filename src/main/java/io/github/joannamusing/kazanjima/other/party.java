@@ -43,6 +43,18 @@ public class party {
     public ArrayList<UUID> getPartyMembers(){
         return this.members;
     }
+    public void addPartyMember(Player player){
+        UUID uuid = player.getUniqueID();
+        if(!members.contains(uuid)){
+            members.add(uuid);
+        }
+    }
+    public void removePartyMember(Player player){
+        UUID uuid = player.getUniqueID();
+        if(members.contains(uuid)){
+            members.remove(uuid);
+        }
+    }
     public int getPartySize(){
         return members.size();
     }
