@@ -15,10 +15,10 @@ public class party {
     ArrayList<UUID> members = new ArrayList<>();
 
     //We create a party object, using values we get from the leader of the new party.
-    public party(Player partyLeader){
-        partyUUID = partyLeader.getUniqueId();
+    public party(Player player, String string){
+        partyUUID = player.getUniqueId();
         partyID = partyUUID.toString();
-        partyName = partyLeader.getName() + "'s Party";
+        partyName = string;
         members.add(partyUUID);
 
     }
@@ -49,8 +49,7 @@ public class party {
             members.add(uuid);
         }
     }
-    public void removePartyMember(Player player){
-        UUID uuid = player.getUniqueID();
+    public void removePartyMember(UUID uuid){
         if(members.contains(uuid)){
             members.remove(uuid);
         }
@@ -58,7 +57,13 @@ public class party {
     public int getPartySize(){
         return members.size();
     }
-
+    public boolean isLeader(Player player){
+        UUID uuid = player.getUniqueID();
+        Party p = PartyManager.getParty(player);
+        if(p.getPartyUUID.equals(uuid)){
+            return true;
+        }
+        return false;
     /*
     This section down here is for party chat methods.
      */
