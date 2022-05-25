@@ -7,7 +7,7 @@ import net.kyori.adventure.text.Component;
 public class party_command implements CommandExecutor {
 
 TODO: Add in the "/party set" branch to allow for leader and name to be changed.
-    
+TODO: Add "/party kick <Player>" command. 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
