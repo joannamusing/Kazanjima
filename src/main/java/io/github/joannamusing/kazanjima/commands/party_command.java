@@ -39,7 +39,7 @@ public class party_command implements CommandExecutor {
                             strings.add("/party - Check your party status.");
                             strings.add("/party <Player> - Invites another player to join your party.");
                             strings.add("/party chat - Toggle party chat on/off.");
-                            strings.add("/party create <String> - Creates a party with the name of the string.
+                            strings.add("/party create <String> - Creates a party with the name of the string.");
                             strings.add("/party disband - Disbands your party.");
                             strings.add("/party help - I wonder what this does.");
                             strings.add("/party invite <Player> - Invites a player to join your party.");
