@@ -2,6 +2,7 @@ package io.github.joannamusing.kazanjima;
 
 import io.github.joannamusing.kazanjima.commands.*;
 import io.github.joannamusing.kazanjima.events.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,12 +15,8 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         l = getLogger();
-        
-        //Grab the default config.yml and save it.
-        this.getServer().getConfig().getDefaultConfig();
-        saveDefaultConfig();
 
-        this.saveDefaultConfig();
+        saveDefaultConfig();
 
         registerCommands();
         registerEvents();
@@ -52,5 +49,8 @@ public final class Main extends JavaPlugin {
     }
     public static Main getInstance(){
         return instance;
+    }
+    public FileConfiguration getConfig(){
+        return this.getConfig();
     }
 }
