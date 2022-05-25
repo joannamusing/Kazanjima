@@ -30,6 +30,9 @@ public class party_manager {
         }
     }
     public void removeParty(party p){
+        for(UUID u : p.getMembers()){
+            p.removePartyMember(u);
+        }
         allParties.remove(p);
     }
     public party getParty(Player player){
