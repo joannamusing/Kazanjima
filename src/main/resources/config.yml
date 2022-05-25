@@ -18,9 +18,9 @@ mySQL:
 #RANKS
 #This is the default rank that all players will have upon joining.
 default-rank: Recruit
-  #This is where you can set the prefix for the default rank.
+#This is where you can set the prefix for the default rank.
   prefix: "&f[&aRecruit&f]
-  #The default rank is automatically given the following permissions, which you can change.
+#The default rank is automatically given the following permissions, which you can change.
   permissions:
     kazanjima.*: true
   
@@ -30,9 +30,9 @@ default-max-homes: 2
 
 #PARTIES
 party:
-  #This is the default identifier for party chat.
+#This is the default identifier for party chat.
   prefix: @
-  #This lets you change the color of the party chat system.
+#This lets you change the color of the party chat system.
   color-1: WHITE
   color-2: GREEN
 
