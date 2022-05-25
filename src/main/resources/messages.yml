@@ -1,2 +1,9 @@
 #This is the YAML file that controls all of the basic messages we respond with for events.
-welcome-message: "Welcome to the server, you potato!"
+
+#The default message for new players that have joined for the first time.
+welcome-message: "Welcome to the server, %player%!"
+#The default message for returning players.
+rejoin-message: "Welcome back, %player%."
+
+#The default message for being banned. 
+banned-message: "You have been banned."
