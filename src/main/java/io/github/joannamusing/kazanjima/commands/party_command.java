@@ -63,8 +63,9 @@ public class party_command implements CommandExecutor {
                             for(Player target : Bukkit.getOnlinePlayers()){
                                 if(args[1].equalsIgnoreCase(target.getName())){
                                     p = PartyManager.getParty(target);
-                                    if(PartyManager.isInvited(player)){
+                                    if(PartyManager.getInvite(target, player)){
                                         p.addMember(player);
+                                        PartyManager.removeInvite();
                                     }
                                 }
                             }
