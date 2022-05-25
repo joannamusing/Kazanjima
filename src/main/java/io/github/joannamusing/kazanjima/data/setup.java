@@ -8,16 +8,14 @@ import java.io.File;
 public class setup {
 
     File file;
-    File folder;
-    File path;
     FileConfiguration fc;
 
     public void setupFile(String path, String fileName){
         file = new File(path, fileName);
         fc = YamlConfiguration.loadConfiguration(file);
-        setupDirectory();
         if(!file.exists()){
             try{
+                file.mkdir();
                 file.createNewFile();
                 fc.save(file);
             }catch(Exception e){
@@ -34,14 +32,6 @@ public class setup {
             fileConfiguration.save(file);
         }catch(Exception e){
             e.printStackTrace();
-        }
-    }
-    public void setupDirectory() {
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-        if (!path.exists()) {
-            path.mkdir();
         }
     }
 }

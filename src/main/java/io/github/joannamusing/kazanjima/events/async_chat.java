@@ -1,13 +1,36 @@
 package io.github.joannamusing.kazanjima.events;
 
-import com.velocitypowered.api.event.PostOrder;
-import com.velocitypowered.api.event.Subscribe;
-import io.papermc.paper.event.player.AsyncChatEvent;
+import io.github.joannamusing.kazanjima.Main;
+import io.github.joannamusing.kazanjima.other.party;
+import io.github.joannamusing.kazanjima.other.party_manager;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class async_chat {
-    @Subscribe(order = PostOrder.NORMAL)
-    public void onAsyncChat(AsyncChatEvent event){
-        //Check if they are using the '@'.
-        //If they are, send it through party chat.
+public class async_chat implements Listener {
+    party_manager pm = new party_manager();
+    @EventHandler
+    public void onAsyncChat(AsyncPlayerChatEvent event){
+        Player player = event.getPlayer();
+        party party = pm.getParty(player);
+        String message = event.getMessage();
+        FileConfiguration fc = Main.getInstance().getConfig();
+        String prefix = fc.getString("party.prefix");
+        player.sendMessage(prefix);
+        //Prefix is currently null?
+        if(prefix != null) {
+            if (message.startsWith(prefix)) {
+                player.sendMessage("prefix worked");
+                if (party != null) {
+                    //This will only return true if the player has party chat toggled on.
+                    if (pm.getChatVisibility(player)) {
+                        party.sendPartyMessage(player, event.toString());
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
     }
 }

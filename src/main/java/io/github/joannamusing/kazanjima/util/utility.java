@@ -11,6 +11,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,8 +22,8 @@ public class utility {
         //If the lore of the items match, return true.
         ItemMeta itemMetaA = a.getItemMeta();
         ItemMeta itemMetaB = b.getItemMeta();
-        if(itemMetaA.getLore().equals(b.getItemMeta.getLore()){
-            return true;
+        if(itemMetaA.getLore() != null && itemMetaB.getLore() != null) {
+            return itemMetaA.getLore().equals(itemMetaB.getLore());
         }
         return false;
     }

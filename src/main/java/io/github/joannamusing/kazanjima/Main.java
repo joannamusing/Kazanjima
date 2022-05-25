@@ -1,10 +1,8 @@
 package io.github.joannamusing.kazanjima;
 
 import io.github.joannamusing.kazanjima.commands.*;
-import io.github.joannamusing.kazanjima.events.block_break;
-import io.github.joannamusing.kazanjima.events.player_join;
-import io.github.joannamusing.kazanjima.events.player_quit;
-import io.github.joannamusing.kazanjima.events.projectile_hit;
+import io.github.joannamusing.kazanjima.events.*;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -16,6 +14,8 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         l = getLogger();
+
+        this.saveDefaultConfig();
 
         registerCommands();
         registerEvents();
@@ -38,10 +38,12 @@ public final class Main extends JavaPlugin {
         l.info("Commands have been registered.");
     }
     public void registerEvents(){
-        getServer().getPluginManager().registerEvents(new block_break(), this);
-        getServer().getPluginManager().registerEvents(new player_join(), this);
-        getServer().getPluginManager().registerEvents(new player_quit(), this);
-        getServer().getPluginManager().registerEvents(new projectile_hit(), this);
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new async_chat(), this);
+        pm.registerEvents(new block_break(), this);
+        pm.registerEvents(new player_join(), this);
+        pm.registerEvents(new player_quit(), this);
+        pm.registerEvents(new projectile_hit(), this);
         l.info("Events have been registered.");
     }
     public static Main getInstance(){

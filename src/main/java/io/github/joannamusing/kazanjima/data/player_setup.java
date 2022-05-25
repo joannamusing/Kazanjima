@@ -28,7 +28,6 @@ public class player_setup {
 
         file = new File(path + "\\" + uuid + ".yml");
         fc = YamlConfiguration.loadConfiguration(file);
-        files.setupDirectory();
         if(!file.exists()){
             try {
                 file.createNewFile();

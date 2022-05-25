@@ -1,0 +1,25 @@
+#Please change these from the defaults to your mySQL settings.
+#You must change mySQL-enabled to true to use your database, otherwise the plugin will operate on config files by default.
+mySQL:
+  mySQL-enabled: false
+  host: host
+  port: 3306
+  database: database
+  username: username
+  password: password
+  minimumConnections: 5
+  maximumConnections: 10
+  connectionTimeOut: 5000
+
+#This determines the default amount of homes available to players.
+default-max-homes: 2
+
+#PARTY SYSTEM
+#-------------------------------------------------------------------------------------
+party:
+  #This is the default identifier for party chat.
+  prefix: @
+  #This lets you change the color of the party chat system.
+  color-1: WHITE
+  color-2: GREEN
+
