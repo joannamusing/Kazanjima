@@ -55,7 +55,7 @@ public class party_manager {
         return true;
     }
     public void removeInvite(Player player){
-
+        invites.remove(player);
     }
 
     /*
