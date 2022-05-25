@@ -1,0 +1,5 @@
+#This is a configuration file for the settings of the plugin.
+#This is the default value of the max homes for all players.
+maxhomes: 2
+#This is the name of the default rank.
+defaultrank: "&fVagabond"
