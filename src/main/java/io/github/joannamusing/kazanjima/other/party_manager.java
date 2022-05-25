@@ -40,9 +40,15 @@ public class party_manager {
         }
         return null;
     }
-    public boolean getInvite(Player player){
-        UUID uuid = player.getUniqueId();
-        return invites.containsKey(uuid);
+    public boolean getInvite(Player sender, Player receiver){
+        UUID senderUUID = sender.getUniqueId();
+        UUID receiverUUID = receiver.getUniqueID();
+        if(invites.containsKey(senderUUID)){
+            if(invites.get(senderUUID).equals(receiverUUID)){
+                return true;
+            }
+        }
+        return false;
     }
     public boolean addInvite(Player user, Player target){
         UUID userUUID = user.getUniqueId();
