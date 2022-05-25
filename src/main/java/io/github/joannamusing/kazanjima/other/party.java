@@ -15,10 +15,10 @@ public class party {
     ArrayList<UUID> members = new ArrayList<>();
 
     //We create a party object, using values we get from the leader of the new party.
-    public party(Player partyLeader){
-        partyUUID = partyLeader.getUniqueId();
+    public party(Player player, String string){
+        partyUUID = player.getUniqueId();
         partyID = partyUUID.toString();
-        partyName = partyLeader.getName() + "'s Party";
+        partyName = string;
         members.add(partyUUID);
 
     }
