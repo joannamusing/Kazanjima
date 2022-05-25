@@ -55,7 +55,10 @@ public class party_manager {
         return true;
     }
     public void removeInvite(Player player){
-        invites.remove(player);
+        UUID uuid = player.getUniqueID();
+        if(invites.contains(uuid){
+            invites.remove(player);
+        }
     }
 
     /*
