@@ -1,5 +1,6 @@
 #Please change these from the defaults to your mySQL settings.
 #You must change mySQL-enabled to true to use your database, otherwise the plugin will operate on config files by default.
+#Do not enable and then disable mySQL as it may break your server data.
 mySQL:
   mySQL-enabled: false
   host: host
@@ -10,7 +11,19 @@ mySQL:
   minimumConnections: 5
   maximumConnections: 10
   connectionTimeOut: 5000
-
+  
+#RANKS
+#-------------------------------------------------------------------------------------
+#This is the default rank that all players will have upon joining.
+default-rank: Recruit
+  #This is where you can set the prefix for the default rank.
+  prefix: "&f[&aRecruit&f]
+  #The default rank is automatically given the following permissions, which you can change.
+  permissions:
+    kazanjima.commands.*: true
+  
+#HOMES
+#-------------------------------------------------------------------------------------
 #This determines the default amount of homes available to players.
 default-max-homes: 2
 
