@@ -31,6 +31,9 @@ public class party_command implements CommandExecutor {
                             break;
                         case("disband"):
                             if(p != null){
+                                if(p.isLeader(player)){
+                                    PartyManager.removeParty(p);
+                                }
                             }
                             break;
                         case("help"):
@@ -54,6 +57,14 @@ public class party_command implements CommandExecutor {
                                 player.sendMessage("/party invite <Player>");
                             }
                             if(p != null){
+                                for(Player target : Bukkit.getOnlinePlayers()){
+                                    if(args[1].equalsIgnoreCase(target.getName())){
+                                        PartyManager.addInvite(player, target);
+                                        String message = "You have been invited to a party by " + player.getName() + "!");
+                                        String command = "party join " + player.getName();
+                                        utility.createClickableCommand(target, message, command);
+                                    }
+                                }
                             }
                             break;
                         case("join"):
@@ -65,13 +76,14 @@ public class party_command implements CommandExecutor {
                                     p = PartyManager.getParty(target);
                                     if(PartyManager.getInvite(target, player)){
                                         p.addMember(player);
-                                        PartyManager.removeInvite();
+                                        PartyManager.removeInvite(target);
                                     }
                                 }
                             }
                             break;
                         case("leave"):
                             if(p != null){
+                                p.removeMember(player);
                             }
                             break;
                     }
