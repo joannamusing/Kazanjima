@@ -60,9 +60,10 @@ public class party_manager {
         invites.put(userUUID, targetUUID);
         return true;
     }
-    public void removeInvite(Player sender){
-        if(invites.contains(sender.getUniqueID()){
-            invites.remove(sender.getUniqueID());
+    public void removeInvite(Player player){
+        UUID uuid = player.getUniqueID();
+        if(invites.contains(uuid){
+            invites.remove(player);
         }
     }
 
