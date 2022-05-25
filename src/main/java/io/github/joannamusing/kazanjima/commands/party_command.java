@@ -10,25 +10,45 @@ public class party_command implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission("kazanjima.commands.party")){
+            if (player.hasPermission("kazanjima.commands.party"));
                 party p = PartyManager.getParty(player);
                 if(args.length > 0){
                     for(Player target : Bukkit.getOnlinePlayers()){
                         if(args[0].equalsIgnoreCase(target.getName())){
+                            //Creates a party if they are not in one, then invites the target player.
+                            //"/party <Player>"
                             if(p != null){
-                            //If args[0] is a player, we then invite them or something.
-                            //Probably use a Bukkit#runCommand or something.
+                                Bukkit.dispatchCommand(player, "party invite " + target.getName();
+                            }else{
+                                Bukkit.dispatchCommand(player, "party create " + (player.getName() + "'s Party);
+                                Bukkit.dispatchCommand(player, "party invite " + target.getName();
                             }
                         }
                     }
                     //If there is some kind of argument after party, we go to the switch. "/party <argument>"
                     switch(args[0]){
+                        //Toggles the party chat on or off.
+                        //"/party chat"
                         case("chat"):
                             if(p != null){
+                                PartyManager.togglePartyChat(player);
                             }
                             break;
+                        //Creates a new party withthe specified name.
+                        //"/party create <String>"
                         case("create"):
+                            if(p == null){
+                                if(args.length == 2){
+                                    p = new party(player, args[1]);
+                                    PartyManager.addParty(p);
+                                }else{
+                                    player.sendMessage("/party create <String>");
+                                }
+                            }else{
+                                player.sendMessage("You are already in a party.");
                             break;
+                        //This will let the party leader disband the party.
+                        //"/party disband"
                         case("disband"):
                             if(p != null){
                                 if(p.isLeader(player)){
