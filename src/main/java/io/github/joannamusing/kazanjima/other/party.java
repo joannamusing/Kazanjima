@@ -57,7 +57,13 @@ public class party {
     public int getPartySize(){
         return members.size();
     }
-
+    public boolean isLeader(Player player){
+        UUID uuid = player.getUniqueID();
+        Party p = PartyManager.getParty(player);
+        if(p.getPartyUUID.equals(uuid)){
+            return true;
+        }
+        return false;
     /*
     This section down here is for party chat methods.
      */
