@@ -49,8 +49,7 @@ public class party {
             members.add(uuid);
         }
     }
-    public void removePartyMember(Player player){
-        UUID uuid = player.getUniqueID();
+    public void removePartyMember(UUID uuid){
         if(members.contains(uuid)){
             members.remove(uuid);
         }
