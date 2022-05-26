@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.UUID;
-
+TODO: If leader, add shift and crtl click option lore.
 public class party_gui {
     //Create a new inventory.
     //Get the party members, and for each party member, make a player head object to display.
