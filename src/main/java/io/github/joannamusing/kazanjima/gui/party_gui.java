@@ -34,7 +34,7 @@ public class party_gui {
         inventory = Bukkit.createInventory(player, (9 * 5), color1 + "" + ChatColor.BOLD + p.getPartyName().toUpperCase());
 
         //Our middle space at the bottom of the GUI we use to toggle chat.
-        inventory.setItem(40, getSignage());
+        inventory.setItem(40, getSignage("Toggle Party Chat", "Click this to toggle party chat."));
 
         for(int i = 0; i < p.getPartySize(); i++){
             UUID uuid = p.getPartyMembers().get(i);
@@ -50,6 +50,7 @@ public class party_gui {
                     skullMeta.setDisplayName(color1 + "" + ChatColor.ITALIC + player.getName());
                     lore.add(color1 + "Shift + Left Click to promote.");
                     lore.add(color1 + "Shift + Right Click to kick.");
+                    inventory.setItem(43, getSignage("Disband Party", "Click this to disband the party.");
                 }else{
                     skullMeta.setDisplayName(color2 + "" + player.getName());
                 }
@@ -58,7 +59,7 @@ public class party_gui {
                 skullMeta.setLore(lore);
                 itemStack.setItemMeta(skullMeta);
                 //Hopefully this works to not overwrite the party chat spot and stuff.
-                if(i == 36 || i == 40 || i == 44){
+                if(i == 36 || i == 40 || i == 43 || i == 44){
                     i++;
                 }
                 getInventory().setItem(i, itemStack);
@@ -73,15 +74,15 @@ public class party_gui {
     public static Inventory getInventory(){
         return inventory;
     }
-    public ItemStack getSignage(){
+    public ItemStack getSignage(String name, String lore){
         ItemStack itemStack = new ItemStack(Material.OAK_SIGN);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if(itemMeta != null) {
-            itemMeta.setDisplayName(color1 + "Toggle Party Chat");
+            itemMeta.setDisplayName(color1 + name);
 
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add(color2 + "Click this sign to toggle party chat.");
-            itemMeta.setLore(lore);
+            ArrayList<String> l = new ArrayList<>();
+            lore.add(color2 + lore);
+            itemMeta.setLore(l);
 
             itemStack.setItemMeta(itemMeta);
         }
