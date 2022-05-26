@@ -30,7 +30,7 @@ public class party_manager {
         }
     }
     public void removeParty(party p){
-        for(UUID u : p.getMembers()){
+        for(UUID u : p.getPartyMembers()){
             p.removePartyMember(u);
         }
         allParties.remove(p);
@@ -45,7 +45,7 @@ public class party_manager {
     }
     public boolean getInvite(Player sender, Player receiver){
         UUID senderUUID = sender.getUniqueId();
-        UUID receiverUUID = receiver.getUniqueID();
+        UUID receiverUUID = receiver.getUniqueId();
         if(invites.containsKey(senderUUID)){
             if(invites.get(senderUUID).equals(receiverUUID)){
                 return true;
@@ -64,8 +64,8 @@ public class party_manager {
         return true;
     }
     public void removeInvite(Player player){
-        UUID uuid = player.getUniqueID();
-        if(invites.contains(uuid){
+        UUID uuid = player.getUniqueId();
+        if(invites.containsKey(uuid)){
             invites.remove(player);
         }
     }

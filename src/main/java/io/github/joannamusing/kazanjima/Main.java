@@ -2,6 +2,7 @@ package io.github.joannamusing.kazanjima;
 
 import io.github.joannamusing.kazanjima.commands.*;
 import io.github.joannamusing.kazanjima.events.*;
+import io.github.joannamusing.kazanjima.other.party_manager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 public final class Main extends JavaPlugin {
     public static Main instance;
     public static Logger l;
+    public party_manager pm;
     @Override
     public void onEnable() {
         instance = this;
@@ -20,6 +22,8 @@ public final class Main extends JavaPlugin {
 
         registerCommands();
         registerEvents();
+
+        pm = new party_manager();
     }
     @Override
     public void onDisable() {
@@ -52,5 +56,8 @@ public final class Main extends JavaPlugin {
     }
     public FileConfiguration getConfig(){
         return this.getConfig();
+    }
+    public party_manager getPartyManager(){
+        return pm;
     }
 }
