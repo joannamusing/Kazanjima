@@ -39,11 +39,13 @@ public class inventory_click implements Listener {
                         case (40):
                             p.togglePartyChat(player);
                             break;
+                        case (43):
+                            Bukkit.dispatchCommand(player, "party disband");
                         case (44):
                             System.out.print("002: Set up next page for Party GUI.");
                             break;
                     }
-                    if (event.getSlot() != 36 && event.getSlot() != 40 && event.getSlot() != 44) {
+                    if (event.getSlot() != 36 && event.getSlot() != 40 && event.getSlot() != 43 && event.getSlot() != 44) {
                         if(event.getCurrentItem() != null) {
                             for (Player target : Bukkit.getOnlinePlayers()) {
                                 ItemStack itemStack = event.getCurrentItem();
