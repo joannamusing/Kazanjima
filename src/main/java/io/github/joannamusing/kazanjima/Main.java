@@ -35,6 +35,7 @@ public final class Main extends JavaPlugin {
         this.getCommand("heal").setExecutor(new heal());
         this.getCommand("home").setExecutor(new home());
         this.getCommand("item").setExecutor(new item());
+        this.getCommand("party").setExecutor(new party_command());
         this.getCommand("rtp").setExecutor(new random_teleport());
         this.getCommand("sethome").setExecutor(new set_home());
         this.getCommand("setwarp").setExecutor(new set_warp());
@@ -46,6 +47,8 @@ public final class Main extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new async_chat(), this);
         pm.registerEvents(new block_break(), this);
+        pm.registerEvents(new inventory_click(), this);
+        pm.registerEvents(new inventory_drag(), this);
         pm.registerEvents(new player_join(), this);
         pm.registerEvents(new player_quit(), this);
         pm.registerEvents(new projectile_hit(), this);

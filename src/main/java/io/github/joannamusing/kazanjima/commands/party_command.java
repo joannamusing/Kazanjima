@@ -46,7 +46,7 @@ public class party_command implements CommandExecutor {
                         */
                         case ("chat"):
                             if (p != null) {
-                                pm.togglePartyChat(player);
+                                p.togglePartyChat(player);
                             }
                             break;
                         /*
@@ -58,6 +58,7 @@ public class party_command implements CommandExecutor {
                                 if (args.length == 2) {
                                     p = new party(player, args[1]);
                                     pm.addParty(p);
+                                    player.sendMessage("You have created a party!");
                                 } else {
                                     player.sendMessage("/party create <String>");
                                 }
@@ -120,6 +121,7 @@ public class party_command implements CommandExecutor {
                                     if (pm.getInvite(target, player)) {
                                         p.addPartyMember(player);
                                         pm.removeInvite(target);
+                                        player.sendMessage("You have joined the party!");
                                     }
                                 }
                             }
@@ -133,6 +135,7 @@ public class party_command implements CommandExecutor {
                                     if (args[1].equalsIgnoreCase(target.getName())) {
                                         if (p.getPartyMembers().contains(target.getUniqueId())) {
                                             p.removePartyMember(target.getUniqueId());
+                                            player.sendMessage("Player has been kicked.");
                                         }
                                     }
                                 }

@@ -7,6 +7,7 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import io.github.joannamusing.kazanjima.events.server_hop;
 import org.slf4j.Logger;
 
 import java.nio.file.Path;
@@ -30,9 +31,9 @@ public class Velocity {
     @Subscribe
     public void onInitialization(ProxyInitializeEvent event){
         CommandManager commandManager = proxyServer.getCommandManager();
-
         logger.info("[Kazanjima]: Registered commands.");
 
+        proxyServer.getEventManager().register(this, new server_hop());
         logger.info("[Kazanjima]: Registered events.");
     }
 }

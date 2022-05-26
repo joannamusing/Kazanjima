@@ -13,6 +13,7 @@ public class party {
     String partyID;
     String partyName;
     ArrayList<UUID> members = new ArrayList<>();
+    ArrayList<UUID> partyChat = new ArrayList<>();
 
     //We create a party object, using values we get from the leader of the new party.
     public party(Player player, String string){
@@ -20,7 +21,7 @@ public class party {
         partyID = partyUUID.toString();
         partyName = string;
         members.add(partyUUID);
-
+        partyChat.add(partyUUID);
     }
     public UUID getPartyUUID(){
         return this.partyUUID;
@@ -50,9 +51,10 @@ public class party {
         }
     }
     public void removePartyMember(UUID uuid){
-        if(members.contains(uuid)){
-            members.remove(uuid);
-        }
+        members.remove(uuid);
+    }
+    public void removeAllPartyMembers(){
+        members.clear();
     }
     public int getPartySize(){
         return members.size();
@@ -72,5 +74,24 @@ public class party {
                 receiver.sendMessage(TAG + "s");
             }
         }
+    }
+    public void togglePartyChat(Player player){
+        UUID uuid = player.getUniqueId();
+        if(partyChat.contains(uuid)){
+            partyChat.remove(uuid);
+            player.sendMessage("Party chat toggled off.");
+        }else{
+            partyChat.add(uuid);
+            player.sendMessage("Party chat toggled on.");
+        }
+    }
+    public boolean getChatVisibility(Player player){
+        UUID uuid = player.getUniqueId();
+        if(partyChat.contains(uuid)){
+            System.out.println("TRUE!");
+            return true;
+        }
+        System.out.println("FALSE!");
+        return false;
     }
 }

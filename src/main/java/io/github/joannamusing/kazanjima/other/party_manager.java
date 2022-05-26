@@ -16,13 +16,12 @@ public class party_manager {
      */
     ArrayList<party> allParties;
     HashMap<UUID, UUID> invites;
-    ArrayList<UUID> partyChat;
 
     //We call our party_manager in our main class in order to initialize it on startup.
     public party_manager(){
         allParties = new ArrayList<>();
         invites = new HashMap<>();
-        partyChat = new ArrayList<>();
+
     }
     public void addParty(party p){
         if(!allParties.contains(p)){
@@ -30,9 +29,7 @@ public class party_manager {
         }
     }
     public void removeParty(party p){
-        for(UUID u : p.getPartyMembers()){
-            p.removePartyMember(u);
-        }
+        p.removeAllPartyMembers();
         allParties.remove(p);
     }
     public party getParty(Player player){
@@ -47,44 +44,23 @@ public class party_manager {
         UUID senderUUID = sender.getUniqueId();
         UUID receiverUUID = receiver.getUniqueId();
         if(invites.containsKey(senderUUID)){
-            if(invites.get(senderUUID).equals(receiverUUID)){
-                return true;
-            }
+            return invites.get(senderUUID).equals(receiverUUID);
         }
         return false;
     }
-    public boolean addInvite(Player user, Player target){
+    public void addInvite(Player user, Player target){
         UUID userUUID = user.getUniqueId();
         UUID targetUUID = target.getUniqueId();
         if(invites.containsKey(userUUID)){
             user.sendMessage("You have already invited someone recently.");
-            return false;
+            return;
         }
         invites.put(userUUID, targetUUID);
-        return true;
     }
     public void removeInvite(Player player){
         UUID uuid = player.getUniqueId();
         if(invites.containsKey(uuid)){
-            invites.remove(player);
+            invites.remove(player.getUniqueId());
         }
-    }
-
-    /*
-    This area down here is for party chat methods.
-     */
-    public void togglePartyChat(Player player){
-        UUID uuid = player.getUniqueId();
-        if(partyChat.contains(uuid)){
-            partyChat.remove(uuid);
-            player.sendMessage("Party chat toggled off.");
-        }else{
-            partyChat.add(uuid);
-            player.sendMessage("Party chat toggled on.");
-        }
-    }
-    public boolean getChatVisibility(Player player){
-        UUID uuid = player.getUniqueId();
-        return partyChat.contains(uuid);
     }
 }
