@@ -22,18 +22,21 @@ public class party_gui {
     private final Player player;
     private final party p;
     private static Inventory inventory;
+    private final ChatColor color1;
+    private final ChatColor color2;
 
     public party_gui(Player player, party p){
         this.player = player;
         this.p = p;
+        this.color1 = p.getColor1();
+        this.color2 = p.getColor2();
     }
 
     public void openPartyGUI(){
-        inventory = Bukkit.createInventory(player, (9 * 5), p.getPartyName());
+        inventory = Bukkit.createInventory(player, (9 * 5), color1 + p.getPartyName());
 
         //Our middle space at the bottom of the GUI we use to toggle chat.
         inventory.setItem(40, getSignage());
-        System.out.print("Sign set.");
 
         for(int i = 0; i < p.getPartySize(); i++){
             UUID uuid = p.getPartyMembers().get(i);
@@ -46,9 +49,9 @@ public class party_gui {
             if(skullMeta != null && player != null) {
                 //Checks if the current player in the loop is our leader, since leader UUID is returned on getUUID().
                 if (p.getPartyUUID().equals(uuid)) {
-                    skullMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.ITALIC + player.getName());
+                    skullMeta.setDisplayName(color1 + "" + ChatColor.ITALIC + player.getName());
                 }else{
-                    skullMeta.setDisplayName(ChatColor.WHITE + "" + player.getName());
+                    skullMeta.setDisplayName(color2 + "" + player.getName());
                 }
                 //This should set each head to be based on the member profiles.
                 skullMeta.setOwnerProfile(player.getPlayerProfile());
@@ -73,10 +76,10 @@ public class party_gui {
         ItemStack itemStack = new ItemStack(Material.OAK_SIGN);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if(itemMeta != null) {
-            itemMeta.setDisplayName(ChatColor.GREEN + "Toggle Party Chat");
+            itemMeta.setDisplayName(color1 + "Toggle Party Chat");
 
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(ChatColor.DARK_RED + "Click this sign to toggle party chat.");
+            lore.add(color2 + "Click this sign to toggle party chat.");
             itemMeta.setLore(lore);
 
             itemStack.setItemMeta(itemMeta);

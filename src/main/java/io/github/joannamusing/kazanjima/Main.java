@@ -17,13 +17,13 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         l = getLogger();
+        pm = new party_manager();
 
         saveDefaultConfig();
-
         registerCommands();
         registerEvents();
 
-        pm = new party_manager();
+
     }
     @Override
     public void onDisable() {

@@ -34,7 +34,7 @@ public class party_manager {
     }
     public party getParty(Player player){
         for(party p : allParties){
-            if(p.getPartyMembers().contains(player.getUniqueId())){
+            if(p.isMember(player)){
                 return p;
             }
         }

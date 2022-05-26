@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class party {
-    public String TAG = ChatColor.WHITE + "[" + ChatColor.GREEN + "Party" + ChatColor.WHITE + "]";
+    ChatColor color1 = ChatColor.GREEN;
+    ChatColor color2 = ChatColor.WHITE;
+    public String TAG = color2 + "[" + color1 + "Party" + color2 + "]";
     UUID partyUUID;
     String partyID;
     String partyName;
@@ -32,8 +34,8 @@ public class party {
     public String getPartyID(){
         return this.partyID;
     }
-    public void setPartyID(){
-        partyID = getPartyUUID().toString();
+    public void setPartyID(Player player){
+        partyID = player.getUniqueId().toString();
     }
     public String getPartyName(){
         return this.partyName;
@@ -63,15 +65,36 @@ public class party {
         UUID uuid = player.getUniqueId();
         return partyUUID.equals(uuid);
     }
+    public boolean isMember(Player player){
+        return this.members.contains(player.getUniqueId());
+    }
+    public void setLeader(Player player){
+        if(!partyUUID.equals(player.getUniqueId())){
+            setPartyUUID(player);
+            setPartyID(player);
+        }
+    }
+    public void promoteMember(Player leader, Player member){
+        if(isLeader(leader)){
+            setLeader(member);
+        }
+    }
+    public ChatColor getColor1(){
+        return color1;
+    }
+    public ChatColor getColor2(){
+        return color2;
+    }
     /*
     This section down here is for party chat methods.
      */
     public void sendPartyMessage(Player sender, String s){
-        s = ChatColor.WHITE + " " + sender.getName() + ChatColor.GREEN + ": " + s;
+        s = s.replace('@', ' ');
+        s = color1 + " " + sender.getName() + color2 + ":" + s;
         for(UUID uuid : getPartyMembers()) {
             Player receiver = Bukkit.getServer().getPlayer(uuid);
             if(receiver != null){
-                receiver.sendMessage(TAG + "s");
+                receiver.sendMessage(TAG + s);
             }
         }
     }
@@ -88,10 +111,8 @@ public class party {
     public boolean getChatVisibility(Player player){
         UUID uuid = player.getUniqueId();
         if(partyChat.contains(uuid)){
-            System.out.println("TRUE!");
             return true;
         }
-        System.out.println("FALSE!");
         return false;
     }
 }

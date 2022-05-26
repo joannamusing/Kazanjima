@@ -1,5 +1,6 @@
 package io.github.joannamusing.kazanjima.commands;
 
+import io.github.joannamusing.kazanjima.Main;
 import io.github.joannamusing.kazanjima.gui.party_gui;
 import io.github.joannamusing.kazanjima.other.party;
 import io.github.joannamusing.kazanjima.other.party_manager;
@@ -14,9 +15,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class party_command implements CommandExecutor {
-    party_manager pm = new party_manager();
+    private final Main plugin = Main.getInstance();
 
-//TODO: Add in the "/party set" branch to allow for leader and name to be changed.
+    party_manager pm = plugin.getPartyManager();
+
+    //TODO: Add in the "/party set" branch to allow for leader and name to be changed.
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -89,6 +92,7 @@ public class party_command implements CommandExecutor {
                             strings.add("/party create <String> - Creates a party with the name of the string.");
                             strings.add("/party disband - Disbands your party.");
                             strings.add("/party help - I wonder what this does.");
+                            strings.add("/party kick <Player> - Kicks the selected member if you are the leader.");
                             strings.add("/party invite <Player> - Invites a player to join your party.");
                             strings.add("/party join <Player>- Accepts an invite from the player.");
                             strings.add("/party leave - Leaves your current party.");
@@ -133,9 +137,11 @@ public class party_command implements CommandExecutor {
                             if (p != null) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     if (args[1].equalsIgnoreCase(target.getName())) {
-                                        if (p.getPartyMembers().contains(target.getUniqueId())) {
-                                            p.removePartyMember(target.getUniqueId());
-                                            player.sendMessage("Player has been kicked.");
+                                        if (p.isLeader(player)) {
+                                            if (p.getPartyMembers().contains(target.getUniqueId())) {
+                                                p.removePartyMember(target.getUniqueId());
+                                                player.sendMessage(target.getName() + " has been kicked from the party.");
+                                            }
                                         }
                                     }
                                 }
@@ -144,6 +150,21 @@ public class party_command implements CommandExecutor {
                         case ("leave"):
                             if (p != null) {
                                 p.removePartyMember(player.getUniqueId());
+                            }
+                            break;
+                        case ("promote"):
+                            if(args.length != 2){
+                                player.sendMessage("/party promote <Player>");
+                            }
+                            if(p != null){
+                                if(p.isLeader(player)){
+                                    for(Player target : Bukkit.getOnlinePlayers()){
+                                        if(target.getName().equalsIgnoreCase(args[1])){
+                                            p.promoteMember(player, target);
+                                            player.sendMessage(target.getName() + " is now the leader.");
+                                        }
+                                    }
+                                }
                             }
                             break;
                     }
