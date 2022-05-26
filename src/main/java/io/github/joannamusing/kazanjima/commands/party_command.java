@@ -108,10 +108,15 @@ public class party_command implements CommandExecutor {
                             if (p != null) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     if (args[1].equalsIgnoreCase(target.getName())) {
-                                        pm.addInvite(player, target);
-                                        String message = "You have been invited to a party by " + player.getName() + "!";
-                                        String cmd = "party join " + player.getName();
-                                        utility.createClickableCommand(target, message, cmd);
+                                        Party t = pm.getParty(target);
+                                        if(t == null){
+                                            pm.addInvite(player, target);
+                                            String message = "You have been invited to a party by " + player.getName() + "!";
+                                            String cmd = "party join " + player.getName();
+                                            utility.createClickableCommand(target, message, cmd);
+                                        }else{
+                                            player.sendMessage("That player is already in a party.");
+                                        }
                                     }
                                 }
                             }
