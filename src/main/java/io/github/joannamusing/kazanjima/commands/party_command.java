@@ -96,6 +96,7 @@ public class party_command implements CommandExecutor {
                             strings.add("/party invite <Player> - Invites a player to join your party.");
                             strings.add("/party join <Player>- Accepts an invite from the player.");
                             strings.add("/party leave - Leaves your current party.");
+                            strings.add("/party promote <Player> - Promote a member to party leader.");
                             for (String s : strings) {
                                 player.sendMessage(s);
                             }
