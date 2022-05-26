@@ -13,8 +13,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.ArrayList;
 import java.util.UUID;
 
-//TODO: If leader, add shift and crtl click option lore.
-
 public class party_gui {
     //Create a new inventory.
     //Get the party members, and for each party member, make a player head object to display.
@@ -33,7 +31,7 @@ public class party_gui {
     }
 
     public void openPartyGUI(){
-        inventory = Bukkit.createInventory(player, (9 * 5), color1 + p.getPartyName());
+        inventory = Bukkit.createInventory(player, (9 * 5), color1 + "" + ChatColor.BOLD + p.getPartyName().toUpperCase());
 
         //Our middle space at the bottom of the GUI we use to toggle chat.
         inventory.setItem(40, getSignage());
@@ -44,19 +42,22 @@ public class party_gui {
 
             //Making a player head item to use for each group member.
             ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
-            //Apparently we have to use SkullMeta for this part; Source: Google.
+            ArrayList<String> lore = new ArrayList<>();
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
             if(skullMeta != null && player != null) {
                 //Checks if the current player in the loop is our leader, since leader UUID is returned on getUUID().
                 if (p.getPartyUUID().equals(uuid)) {
                     skullMeta.setDisplayName(color1 + "" + ChatColor.ITALIC + player.getName());
+                    lore.add(color1 + "Shift + Left Click to promote.");
+                    lore.add(color1 + "Shift + Right Click to kick.");
                 }else{
                     skullMeta.setDisplayName(color2 + "" + player.getName());
                 }
                 //This should set each head to be based on the member profiles.
                 skullMeta.setOwnerProfile(player.getPlayerProfile());
+                skullMeta.setLore(lore);
                 itemStack.setItemMeta(skullMeta);
-                //Hopefully this works?!
+                //Hopefully this works to not overwrite the party chat spot and stuff.
                 if(i == 36 || i == 40 || i == 44){
                     i++;
                 }

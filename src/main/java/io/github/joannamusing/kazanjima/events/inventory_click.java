@@ -5,10 +5,13 @@ import io.github.joannamusing.kazanjima.gui.party_gui;
 import io.github.joannamusing.kazanjima.other.party;
 import io.github.joannamusing.kazanjima.other.party_manager;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Objects;
 
@@ -43,12 +46,20 @@ public class inventory_click implements Listener {
                     if (event.getSlot() != 36 && event.getSlot() != 40 && event.getSlot() != 44) {
                         if(event.getCurrentItem() != null) {
                             for (Player target : Bukkit.getOnlinePlayers()) {
-                                if (target.getName().equalsIgnoreCase(event.getCurrentItem().getItemMeta().getDisplayName())) {
-                                    player.sendMessage("We made it here!"); //This is where the code fails.
-                                    if (event.isShiftClick() && event.isRightClick()) {
-                                        Bukkit.dispatchCommand(player, "party kick " + target.getName());
-                                    } else if (event.isShiftClick() && event.isLeftClick()) {
-                                        Bukkit.dispatchCommand(player, "party promote " + target.getName());
+                                ItemStack itemStack = event.getCurrentItem();
+                                if(itemStack.getType().equals(Material.PLAYER_HEAD)){
+                                    SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
+                                    if(skullMeta.hasOwner() && skullMeta.getOwningPlayer() != null) {
+                                        Player t = skullMeta.getOwningPlayer().getPlayer();
+                                        if(t != null) {
+                                            if (target.getName().equalsIgnoreCase(t.getName())) {
+                                                if (event.isShiftClick() && event.isRightClick()) {
+                                                    Bukkit.dispatchCommand(player, "party kick " + target.getName());
+                                                } else if (event.isShiftClick() && event.isLeftClick()) {
+                                                    Bukkit.dispatchCommand(player, "party promote " + target.getName());
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }

@@ -139,6 +139,10 @@ public class party_command implements CommandExecutor {
                                     if (args[1].equalsIgnoreCase(target.getName())) {
                                         if (p.isLeader(player)) {
                                             if (p.getPartyMembers().contains(target.getUniqueId())) {
+                                                if(p.isLeader(target)){
+                                                    player.sendMessage("You are the leader, please promote someone first.");
+                                                    break;
+                                                }
                                                 p.removePartyMember(target.getUniqueId());
                                                 player.sendMessage(target.getName() + " has been kicked from the party.");
                                             }
@@ -160,6 +164,10 @@ public class party_command implements CommandExecutor {
                                 if(p.isLeader(player)){
                                     for(Player target : Bukkit.getOnlinePlayers()){
                                         if(target.getName().equalsIgnoreCase(args[1])){
+                                            if(p.isLeader(target)){
+                                                player.sendMessage("You are already the leader.");
+                                                break;
+                                            }
                                             p.promoteMember(player, target);
                                             player.sendMessage(target.getName() + " is now the leader.");
                                         }
