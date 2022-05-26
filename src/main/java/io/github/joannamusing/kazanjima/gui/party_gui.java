@@ -35,8 +35,13 @@ public class party_gui {
 
         //Our middle space at the bottom of the GUI we use to toggle chat.
         inventory.setItem(40, getSignage("Toggle Party Chat", "Click this to toggle party chat."));
+        inventory.setItem(43, getSignage("Disband Party", "Click this to disband the party."));
+        
+        //TODO: Make it support multiple inventory pages, and allow switching between them.
+        
+        int x = p.getPartyMembers % 44;
 
-        for(int i = 0; i < p.getPartySize(); i++){
+        for(int i = 0; i < p.getPartyMembers(); i++){
             UUID uuid = p.getPartyMembers().get(i);
             Player player = Bukkit.getPlayer(uuid);
 
