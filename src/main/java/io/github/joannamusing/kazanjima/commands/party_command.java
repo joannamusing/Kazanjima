@@ -7,7 +7,6 @@ import net.kyori.adventure.text.Component;
 public class party_command implements CommandExecutor {
 
 TODO: Add in the "/party set" branch to allow for leader and name to be changed.
-TODO: Add "/party kick <Player>" command. 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -110,6 +109,18 @@ TODO: Add "/party kick <Player>" command.
                                     if(PartyManager.getInvite(target, player)){
                                         p.addMember(player);
                                         PartyManager.removeInvite(target);
+                                    }
+                                }
+                            }
+                            break;
+                        case("kick"):
+                            if(args.length != 2){
+                                player.sendMessage("/party kick <Player>");
+                            }
+                            for(Player target : Bukkit.getOnlinePlayers()){
+                                if(args[1].equalsIgnoreCase(target.getName())){
+                                    if(p.getPartyMembers().contains(target.getUniqueID())){
+                                        p.removePartyMember(target.getUniqueID());
                                     }
                                 }
                             }
