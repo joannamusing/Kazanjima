@@ -10,8 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
 public class party_gui {
     //Create a new inventory.
@@ -19,78 +18,115 @@ public class party_gui {
     //Return the inventory to the user.
     private final Player player;
     private final party p;
-    private static Inventory inventory;
+    private final List<Inventory> inventories;
+    private static HashMap<UUID, party_gui> openInventories;
+    private final int currentPage = 0;
     private final ChatColor color1;
     private final ChatColor color2;
+    public final String nextPage;
+    public final String previousPage;
 
     public party_gui(Player player, party p){
         this.player = player;
         this.p = p;
         this.color1 = p.getColor1();
         this.color2 = p.getColor2();
+        this.nextPage = color2 + "Next Page";
+        this.previousPage = color2 + "Previous Page";
+        this.inventories = new ArrayList<>();
+        openInventories = new HashMap<>();
     }
+    public void openPartyGUI(Player player, String string, ArrayList<ItemStack> skulls){
+        Inventory newPage = getBlankPage(string);
+        for (ItemStack skull : skulls) {
+            //If the first slot that is empty is our slot after Previous Page button.
+            if (newPage.firstEmpty() == 46) {
+                inventories.add(newPage);
+                newPage = getBlankPage(string);
+                newPage.addItem(skull);
+            } else {
 
-    public void openPartyGUI(){
-        inventory = Bukkit.createInventory(player, (9 * 5), color1 + "" + ChatColor.BOLD + p.getPartyName().toUpperCase());
-
-        //Our middle space at the bottom of the GUI we use to toggle chat.
-        inventory.setItem(40, getSignage("Toggle Party Chat", "Click this to toggle party chat."));
-        inventory.setItem(43, getSignage("Disband Party", "Click this to disband the party."));
-        
-        //TODO: Make it support multiple inventory pages, and allow switching between them.
-        
-        int x = p.getPartyMembers % 44;
-
-        for(int i = 0; i < p.getPartyMembers(); i++){
-            UUID uuid = p.getPartyMembers().get(i);
-            Player player = Bukkit.getPlayer(uuid);
-
-            //Making a player head item to use for each group member.
-            ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
-            ArrayList<String> lore = new ArrayList<>();
-            SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-            if(skullMeta != null && player != null) {
-                //Checks if the current player in the loop is our leader, since leader UUID is returned on getUUID().
-                if (p.getPartyUUID().equals(uuid)) {
-                    skullMeta.setDisplayName(color1 + "" + ChatColor.ITALIC + player.getName());
-                    lore.add(color1 + "Shift + Left Click to promote.");
-                    lore.add(color1 + "Shift + Right Click to kick.");
-                    inventory.setItem(43, getSignage("Disband Party", "Click this to disband the party.");
-                }else{
-                    skullMeta.setDisplayName(color2 + "" + player.getName());
-                }
-                //This should set each head to be based on the member profiles.
-                skullMeta.setOwnerProfile(player.getPlayerProfile());
-                skullMeta.setLore(lore);
-                itemStack.setItemMeta(skullMeta);
-                //Hopefully this works to not overwrite the party chat spot and stuff.
-                if(i == 36 || i == 40 || i == 43 || i == 44){
-                    i++;
-                }
-                getInventory().setItem(i, itemStack);
-                player.openInventory(inventory);
+                newPage.addItem(skull);
             }
         }
+        inventories.add(newPage);
+        openInventories.put(player.getUniqueId(), this);
+        player.openInventory(inventories.get(currentPage));
+    }
+    public Inventory getBlankPage(String string){
+        Inventory blankPage = Bukkit.createInventory(null, (9 * 6), string);
 
+        ItemStack nextPageIcon = new ItemStack(Material.PAPER, 1);
+        ItemMeta nextPageMeta = nextPageIcon.getItemMeta();
+        if(nextPageMeta != null) {
+            nextPageMeta.setDisplayName(nextPage);
+            nextPageIcon.setItemMeta(nextPageMeta);
+        }
+        ItemStack previousPageIcon = new ItemStack(Material.PAPER, 1);
+        ItemMeta previousPageMeta = nextPageIcon.getItemMeta();
+        if(previousPageMeta != null) {
+            previousPageMeta.setDisplayName(previousPage);
+            previousPageIcon.setItemMeta(previousPageMeta);
+        }
+        blankPage.setItem(48, createItem(Material.OAK_SIGN, "Toggle Party Chat", "Click this to toggle party chat."));
+        blankPage.setItem(50, createItem(Material.OAK_SIGN, "Disband Party", "Click this to disband the party."));
+        blankPage.setItem(45, previousPageIcon);
+        blankPage.setItem(53, nextPageIcon);
+        return blankPage;
     }
-    public Player getPlayer(){
-        return player;
+    /*
+    This will create all the player heads for the PartyGUI.
+    If the user is the leader of the party, they will also show the shift-click options.
+     */
+    public ArrayList<ItemStack> generateSkulls(Player user, ArrayList<UUID> players){
+        ArrayList<ItemStack> skulls = new ArrayList<>();
+        ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        if(skullMeta != null) {
+            for (UUID uuid : players) {
+                Player player = Bukkit.getPlayer(uuid);
+                if (player == null) {
+                    break;
+                }
+                if (p.getPartyUUID().equals(uuid)) {
+                    skullMeta.setDisplayName(color1 + "" + ChatColor.ITALIC + player.getName());
+                } else {
+                    skullMeta.setDisplayName(color2 + "" + player.getName());
+                }
+                if(user.getUniqueId().equals(p.getPartyUUID())) {
+                    lore.add(color1 + "Shift + Left Click to promote.");
+                    lore.add(color1 + "Shift + Right Click to kick.");
+                }
+                skullMeta.setOwnerProfile(Objects.requireNonNull(Bukkit.getPlayer(uuid)).getPlayerProfile());
+                skullMeta.setLore(lore);
+                itemStack.setItemMeta(skullMeta);
+                skulls.add(itemStack);
+            }
+        }
+        return skulls;
     }
-    public static Inventory getInventory(){
-        return inventory;
-    }
-    public ItemStack getSignage(String name, String lore){
-        ItemStack itemStack = new ItemStack(Material.OAK_SIGN);
+    public ItemStack createItem(Material material, String name, String lore){
+        ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if(itemMeta != null) {
             itemMeta.setDisplayName(color1 + name);
 
             ArrayList<String> l = new ArrayList<>();
-            lore.add(color2 + lore);
+            l.add(color2 + lore);
             itemMeta.setLore(l);
 
             itemStack.setItemMeta(itemMeta);
         }
         return itemStack;
+    }
+    public List<Inventory> getInventories(){
+        return inventories;
+    }
+    public static HashMap<UUID, party_gui> getOpenInventories(){
+        return openInventories;
+    }
+    public int getCurrentPage(){
+        return currentPage;
     }
 }

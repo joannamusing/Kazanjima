@@ -77,6 +77,7 @@ public class party_command implements CommandExecutor {
                             if (p != null) {
                                 if (p.isLeader(player)) {
                                     pm.removeParty(p);
+                                    player.sendMessage("Party disbanded.");
                                 }
                             }
                             break;
@@ -108,7 +109,7 @@ public class party_command implements CommandExecutor {
                             if (p != null) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     if (args[1].equalsIgnoreCase(target.getName())) {
-                                        Party t = pm.getParty(target);
+                                        party t = pm.getParty(target);
                                         if(t == null){
                                             pm.addInvite(player, target);
                                             String message = "You have been invited to a party by " + player.getName() + "!";
@@ -189,7 +190,7 @@ public class party_command implements CommandExecutor {
                 } else {
                     if (p != null) {
                         party_gui pgui = new party_gui(player, p);
-                        pgui.openPartyGUI();
+                        pgui.openPartyGUI(player, p.getPartyName(), pgui.generateSkulls(player, p.getPartyMembers()));
                     } else {
                         player.sendMessage("You are not in a party. Try \"/party help\".");
                     }

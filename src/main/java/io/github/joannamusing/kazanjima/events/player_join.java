@@ -19,10 +19,12 @@ public class player_join implements Listener {
             alpha.setupPlayerFile(player);
         }else{
             player.sendMessage("Welcome back, " + name + "!");
+
         }
     }
     @Subscribe(order = PostOrder.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent event){
+        Player player = event.getPlayer();
         //Check if the person connecting is a group leader.
         //If they are, set their timer to null.
     }
