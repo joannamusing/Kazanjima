@@ -6,7 +6,7 @@ import com.velocitypowered.api.event.player.ServerConnectedEvent;
 import com.velocitypowered.api.proxy.Player;
 import io.github.joannamusing.kazanjima.Main;
 import io.github.joannamusing.kazanjima.data.plugin_message;
-import io.github.joannamusing.kazanjima.other.party;
+import io.github.joannamusing.kazanjima.other.Party;
 import io.github.joannamusing.kazanjima.other.party_manager;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
@@ -18,9 +18,9 @@ public class server_hop {
     private final party_manager pm = plugin.getPartyManager();
 
     @Subscribe(order = PostOrder.NORMAL)
-    public void onServerHop(ServerConnectedEvent event){
+    public void onEvent(ServerConnectedEvent event){
         Player player = event.getPlayer();
-        party p = pm.getParty((org.bukkit.entity.Player) player);
+        Party p = pm.getParty((org.bukkit.entity.Player) player);
         if(p != null){
             Server server = (Server) event.getServer();
             int maximumPlayers = server.getMaxPlayers();

@@ -9,7 +9,7 @@ import org.bukkit.inventory.Inventory;
 
 public class inventory_drag implements Listener {
     @EventHandler
-    public void onDrag(InventoryDragEvent event){
+    public void onEvent(InventoryDragEvent event){
         if(event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
             if (party_gui.getOpenInventories() != null) {

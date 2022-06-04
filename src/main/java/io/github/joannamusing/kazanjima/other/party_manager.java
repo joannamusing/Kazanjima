@@ -14,7 +14,7 @@ public class party_manager {
     The HashMap is <Inviter, Invitee> for clarification.
     We store the list of all players from all parties who have enabled partyChat in an ArrayList.
      */
-    ArrayList<party> allParties;
+    ArrayList<Party> allParties;
     HashMap<UUID, UUID> invites;
 
     //We call our party_manager in our main class in order to initialize it on startup.
@@ -23,17 +23,17 @@ public class party_manager {
         invites = new HashMap<>();
 
     }
-    public void addParty(party p){
+    public void addParty(Party p){
         if(!allParties.contains(p)){
             allParties.add(p);
         }
     }
-    public void removeParty(party p){
+    public void removeParty(Party p){
         p.removeAllPartyMembers();
         allParties.remove(p);
     }
-    public party getParty(Player player){
-        for(party p : allParties){
+    public Party getParty(Player player){
+        for(Party p : allParties){
             if(p.isMember(player)){
                 return p;
             }

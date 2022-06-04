@@ -1,6 +1,6 @@
 package io.github.joannamusing.kazanjima.gui;
 
-import io.github.joannamusing.kazanjima.other.party;
+import io.github.joannamusing.kazanjima.other.Party;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -17,7 +17,7 @@ public class party_gui {
     //Get the party members, and for each party member, make a player head object to display.
     //Return the inventory to the user.
     private final Player player;
-    private final party p;
+    private final Party p;
     private final List<Inventory> inventories;
     private static HashMap<UUID, party_gui> openInventories;
     private final int currentPage = 0;
@@ -26,7 +26,7 @@ public class party_gui {
     public final String nextPage;
     public final String previousPage;
 
-    public party_gui(Player player, party p){
+    public party_gui(Player player, Party p){
         this.player = player;
         this.p = p;
         this.color1 = p.getColor1();

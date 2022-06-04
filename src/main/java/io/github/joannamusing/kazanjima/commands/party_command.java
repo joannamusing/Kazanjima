@@ -2,7 +2,7 @@ package io.github.joannamusing.kazanjima.commands;
 
 import io.github.joannamusing.kazanjima.Main;
 import io.github.joannamusing.kazanjima.gui.party_gui;
-import io.github.joannamusing.kazanjima.other.party;
+import io.github.joannamusing.kazanjima.other.Party;
 import io.github.joannamusing.kazanjima.other.party_manager;
 import io.github.joannamusing.kazanjima.util.utility;
 import org.bukkit.Bukkit;
@@ -25,7 +25,7 @@ public class party_command implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.hasPermission("kazanjima.commands.party")) {
-                party p = pm.getParty(player);
+                Party p = pm.getParty(player);
                 if (args.length > 0) {
                     for (Player target : Bukkit.getOnlinePlayers()) {
                         if (args[0].equalsIgnoreCase(target.getName())) {
@@ -59,7 +59,7 @@ public class party_command implements CommandExecutor {
                         case ("create"):
                             if (p == null) {
                                 if (args.length == 2) {
-                                    p = new party(player, args[1]);
+                                    p = new Party(player, args[1]);
                                     pm.addParty(p);
                                     player.sendMessage("You have created a party!");
                                 } else {
@@ -109,7 +109,7 @@ public class party_command implements CommandExecutor {
                             if (p != null) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     if (args[1].equalsIgnoreCase(target.getName())) {
-                                        party t = pm.getParty(target);
+                                        Party t = pm.getParty(target);
                                         if(t == null){
                                             pm.addInvite(player, target);
                                             String message = "You have been invited to a party by " + player.getName() + "!";

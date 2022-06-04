@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerKickEvent;
 
 public class player_kick {
     @Subscribe(order = PostOrder.NORMAL)
-    public void onPlayerKicked(PlayerKickEvent event){
+    public void onEvent(PlayerKickEvent event){
         //Check if the player is a group leader.
         //If they are, create a timer.
         //If timer gets to X, set new group leader.

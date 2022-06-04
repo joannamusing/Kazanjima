@@ -12,6 +12,7 @@ This class is to handle sending data between the plugins of multiple servers.
 public class plugin_message {
     /*
     A method to connect a player to a specified server.
+    Author: joannamusing
      */
     public static void connectPlayer(Player player, String server){
         ByteArrayDataOutput output = ByteStreams.newDataOutput();
@@ -22,6 +23,7 @@ public class plugin_message {
     }
     /*
     A method to connect a target player to a host player on a server.
+    Author: joannamusing
      */
     public static void connectOtherPlayer(Player host, Player target){
         RegisteredServer registeredServer = (RegisteredServer) host.getServer();

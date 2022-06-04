@@ -23,6 +23,11 @@ default-rank: Recruit
 #The default rank is automatically given the following permissions, which you can change.
   permissions:
     kazanjima.*: true
+ranks:
+  potato:
+    prefix: "&f[&aPotato&f]"
+    permissions:
+      kazanjima.*: true
   
 #HOMES
 #This determines the default amount of homes available to players.

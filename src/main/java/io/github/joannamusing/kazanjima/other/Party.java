@@ -7,20 +7,18 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class party {
+public class Party {
     ChatColor color1 = ChatColor.GREEN;
     ChatColor color2 = ChatColor.WHITE;
     public String TAG = color2 + "[" + color1 + "Party" + color2 + "]";
     UUID partyUUID;
-    String partyID;
     String partyName;
     ArrayList<UUID> members = new ArrayList<>();
     ArrayList<UUID> partyChat = new ArrayList<>();
 
     //We create a party object, using values we get from the leader of the new party.
-    public party(Player player, String string){
+    public Party(Player player, String string){
         partyUUID = player.getUniqueId();
-        partyID = partyUUID.toString();
         partyName = string;
         members.add(partyUUID);
         partyChat.add(partyUUID);
@@ -30,12 +28,6 @@ public class party {
     }
     public void setPartyUUID(Player player){
         partyUUID = player.getUniqueId();
-    }
-    public String getPartyID(){
-        return this.partyID;
-    }
-    public void setPartyID(Player player){
-        partyID = player.getUniqueId().toString();
     }
     public String getPartyName(){
         return this.partyName;
@@ -71,7 +63,6 @@ public class party {
     public void setLeader(Player player){
         if(!partyUUID.equals(player.getUniqueId())){
             setPartyUUID(player);
-            setPartyID(player);
         }
     }
     public void promoteMember(Player leader, Player member){

@@ -2,7 +2,7 @@ package io.github.joannamusing.kazanjima.events;
 
 import io.github.joannamusing.kazanjima.Main;
 import io.github.joannamusing.kazanjima.gui.party_gui;
-import io.github.joannamusing.kazanjima.other.party;
+import io.github.joannamusing.kazanjima.other.Party;
 import io.github.joannamusing.kazanjima.other.party_manager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -24,10 +24,10 @@ public class inventory_click implements Listener {
     kick or promote players (if leader). Interfacing for secondary "page" is planned for parties over 35 members.
      */
     @EventHandler
-    public void onClick(InventoryClickEvent event) {
+    public void onEvent(InventoryClickEvent event) {
         if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
-            party p = pm.getParty(player);
+            Party p = pm.getParty(player);
             //This block will return the inventory the player is in, if it is one of the party GUIs.
             if (party_gui.getOpenInventories() != null) {
                 if (party_gui.getOpenInventories().containsKey(player.getUniqueId())) {
