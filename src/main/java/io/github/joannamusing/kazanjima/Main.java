@@ -52,6 +52,7 @@ public final class Main extends JavaPlugin {
         pm.registerEvents(new player_join(), this);
         pm.registerEvents(new player_quit(), this);
         pm.registerEvents(new projectile_hit(), this);
+        pm.registerEvents(new right_click(), this);
         l.info("Events have been registered.");
     }
     public static Main getInstance(){

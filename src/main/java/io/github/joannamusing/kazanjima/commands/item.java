@@ -2,6 +2,7 @@ package io.github.joannamusing.kazanjima.commands;
 
 import io.github.joannamusing.kazanjima.items.ender_bow;
 import io.github.joannamusing.kazanjima.items.molten_pickaxe;
+import io.github.joannamusing.kazanjima.items.repair_gem;
 import io.github.joannamusing.kazanjima.util.utility;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -51,6 +52,7 @@ public class item implements CommandExecutor {
          */
         items.add(ender_bow.get());
         items.add(molten_pickaxe.get());
+        items.add(repair_gem.get());
         return items;
     }
     public static ArrayList<String> getItemNames (ArrayList<ItemStack> items) {

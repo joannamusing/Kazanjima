@@ -49,6 +49,9 @@ public class player_setup {
                 fc.createSection("homes.total");
                 fc.set("homes.total", 0);
 
+                fc.createSection("conditions.repairing");
+                fc.set("conditions.repairing", true);
+
                 fc.save(file);
             }catch(IOException e){
                 e.printStackTrace();
